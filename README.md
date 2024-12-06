@@ -39,11 +39,19 @@ pattern, or through `dkms` (recommended).
 
     dkms install .
 
+Put `udev/99-vendor-reset.rules` into `/etc/udev/rules.d/99-vendor-reset.rules`
+
+    udevadm control --reload-rules && udevadm trigger
+
 ## Usage
 
 Either `modprobe vendor-reset` or add the device to the appropriate place to
 load it at system boot, such as `/etc/modules` (Debian). Consult your
 distribution's documentation as to the best way to perform this.
+
+Execute `echo device_specific > /sys/bus/pci/devices/[REPLACE_WITH_GPU_ID]/reset_method`.
+
+Both of these things should be accomplished by 99-vendor-reset.rules.
 
 **NOTE: ** This module must be loaded EARLY, the default reset the kernel will
 try to perform completely breaks the GPU which this module can not recover from.
@@ -76,4 +84,20 @@ please first consider two things:
    (see: kernel/drivers/pci/quirk.c)?
 
 If you answer yes to either of these questions this project is not for you.
+
+## Usage with unsupported Devices
+
+Vendor-reset triggers only if your GPU's product ID matches the listed 
+devices above. However many more devices will potentially work, if their 
+product IDs are simply added in device-db.h and 99-vendor-reset.rules, to 
+deploy one of the four currently implemented reset strategies (POLARIS10, 
+VEGA10, VEGA20, NAVI10) in a trial and error process.
+
+Furthermore you can find some useful explanations in the amdgpu source files:
+* [amdgpu.h](https://github.com/torvalds/linux/blob/master/drivers/gpu/drm/amd/amdgpu/amdgpu.h): enum amd_reset_method 
+* [amdgpu_drv.c](https://github.com/torvalds/linux/blob/master/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c): product ID -> chip type
+
+NAVI10 for example makes the most sense to try for iGPUs (integrated), and
+people have done this with success for various models (e.g. [Vega7/5600G](https://forum.proxmox.com/threads/amd-ryzen-5600g-igpu-code-43-error.138665/post-726791) ).
+
 
