@@ -49,15 +49,21 @@ Either `modprobe vendor-reset` or add the device to the appropriate place to
 load it at system boot, such as `/etc/modules` (Debian). Consult your
 distribution's documentation as to the best way to perform this.
 
-Execute `echo device_specific > /sys/bus/pci/devices/[REPLACE_WITH_GPU_ID]/reset_method`.
-
-Both of these things should be accomplished by 99-vendor-reset.rules.
-
 **NOTE: ** This module must be loaded EARLY, the default reset the kernel will
 try to perform completely breaks the GPU which this module can not recover from.
 Please consult your distributions documentation on how to do this, for most
 however it will be as simple as adding `vendor-reset` to `/etc/modules` and
 updating your initrd.
+
+Then execute: `echo device_specific > /sys/bus/pci/devices/[REPLACE_WITH_GPU_ID]/reset_method`.
+
+Both of these things are also accomplished by 99-vendor-reset.rules.
+
+If successful, vendor-reset will output to dmesg and prevent the Qemu reset bug:
+
+    qemu-system-x86_64: ../qemu-9.1.2/hw/pci/pci.c:1637: pci_irq_handler: Assertion 0 <= irq_num && irq_num < PCI_NUM_PINS' failed.
+
+Please keep in mind that vendor-reset can only fix the bug before it occurs, not after.
 
 ## Supported Devices
 
