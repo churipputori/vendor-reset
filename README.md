@@ -69,15 +69,17 @@ Please keep in mind that vendor-reset can only fix the bug before it occurs, not
 
 | Vendor | Family | Common Name(s)
 |---|---|---|
-|AMD|Polaris 10| RX 470, 480, 570, 580, 590
-|AMD|Polaris 11| RX 460, 560
-|AMD|Polaris 12| RX 540, 550
+|AMD|Polaris 10| RX 470, 480, 570, 580, 590 |
+|AMD|Polaris 11| RX 460, 560 |
+|AMD|Polaris 12| RX 540, 550 |
 |AMD|Vega 10| Vega 56/64/FE |
 |AMD|Vega 20| Radeon VII |
 |AMD|Vega 20| Instinct MI100 |
-|AMD|Navi 10| 5600XT, 5700, 5700XT
+|AMD|Vega 20| 5700U Vega 8 |
+|AMD|Navi 10| 5600XT, 5700, 5700XT |
 |AMD|Navi 12| Pro 5600M |
-|AMD|Navi 14| Pro 5300, RX 5300, 5500XT
+|AMD|Navi 14| Pro 5300, RX 5300, 5500XT |
+|AMD|Navi 23|Radeon RX 6600/6600 XT/6600M |
 
 ## Developing
 
