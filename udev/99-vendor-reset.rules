@@ -1,5 +1,6 @@
 # Rules to ensure vendor-reset is loaded and the reset_method for our devices is set to 'device_specific' for kernel 5.15+
 # (the module must be loaded, otherwise setting this may fail)
+
 ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1002", ATTR{device}=="0x67c0", RUN+="/bin/sh -c '/sbin/modprobe vendor-reset; echo device_specific > /sys$env{DEVPATH}/reset_method'"
 
 ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1002", ATTR{device}=="0x67c1", RUN+="/bin/sh -c '/sbin/modprobe vendor-reset; echo device_specific > /sys$env{DEVPATH}/reset_method'"
@@ -133,3 +134,6 @@ ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1002", ATTR{device}=="0x7360",
 ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1002", ATTR{device}=="0x7362", RUN+="/bin/sh -c '/sbin/modprobe vendor-reset; echo device_specific > /sys$env{DEVPATH}/reset_method'"
 
 ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1002", ATTR{device}=="0x738c", RUN+="/bin/sh -c '/sbin/modprobe vendor-reset; echo device_specific > /sys$env{DEVPATH}/reset_method'"
+
+ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1002", ATTR{device}=="0x164c", RUN+="/bin/sh -c '/sbin/modprobe vendor-reset; echo device_specific > /sys$env{DEVPATH}/reset_method'"
+
